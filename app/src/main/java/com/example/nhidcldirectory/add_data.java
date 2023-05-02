@@ -82,6 +82,7 @@ public class add_data extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<Employee> call, Throwable t) {
+                            Log.d("error adding",t.toString());
                             Toast.makeText(add_data.this, "Save failed!", Toast.LENGTH_SHORT).show();
                         }
                     });

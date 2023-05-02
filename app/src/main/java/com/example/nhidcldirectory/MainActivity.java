@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.guest=false;
                 /*Intent intent=new Intent(MainActivity.this,page1.class);
                 startActivity(intent);*/
-                Intent intent=new Intent(MainActivity.this,add_data.class);
+                Intent intent=new Intent(MainActivity.this,page1.class);
                 startActivity(intent);
             }
         });
