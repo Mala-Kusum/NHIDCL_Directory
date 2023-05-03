@@ -32,7 +32,7 @@ import java.util.List;
 
 public class Executive_Director extends AppCompatActivity {
    
-    ArrayList<Employee> list;
+    List<Employee> list;
     ArrayList<Employee> stateList,nameList;
     RecyclerView recycler;
     boolean flag,flag2;
@@ -53,7 +53,7 @@ public class Executive_Director extends AppCompatActivity {
         flag2=true;
         Log.e("Taaag", String.valueOf(list));
         Context context=Executive_Director.this;
-        adapt=new MAdapter(this,list);
+        adapt=new MAdapter(this, (ArrayList<Employee>) list);
         sharedPref = context.getSharedPreferences("shared preference", Context.MODE_PRIVATE);
         recycler.setAdapter(adapt);
     }
@@ -287,7 +287,7 @@ public class Executive_Director extends AppCompatActivity {
         }
         return true;
     }
-    @Override
+   /* @Override
     public boolean onOptionsItemSelected(MenuItem item){
         if(item.getItemId()==R.id.item3){
             SharedPreferences.Editor editor = sharedPref.edit();
@@ -305,7 +305,7 @@ public class Executive_Director extends AppCompatActivity {
             startActivity(intent);
         }
         return true;
-    }
+    }*/
 
 }
 
