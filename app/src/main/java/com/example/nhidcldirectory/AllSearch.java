@@ -51,9 +51,10 @@ public class AllSearch extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context=AllSearch.this;
+        setContentView(R.layout.activity_all_search);
         recycler=findViewById(R.id.executive_director);
-        recycler.setHasFixedSize(true);
-        recycler.setLayoutManager(new LinearLayoutManager(this));
+        recycler.setLayoutManager(new LinearLayoutManager(AllSearch.this));
+        //recycler.setHasFixedSize(true);
         sharedPref = context.getSharedPreferences("shared preference", Context.MODE_PRIVATE);
 
         retrofitService retroservice = new retrofitService();
@@ -63,11 +64,13 @@ public class AllSearch extends AppCompatActivity {
             public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response) {
                 adapt=new MAdapter(AllSearch.this, (ArrayList<Employee>) response.body());
                 recycler.setAdapter(adapt);
+
             }
 
             @Override
             public void onFailure(Call<List<Employee>> call, Throwable t) {
                 Toast.makeText(AllSearch.this, "data fetch failed!", Toast.LENGTH_SHORT).show();
+                Log.d("data fetch failed",t.toString());
             }
         });
         recycler.setAdapter(adapt);

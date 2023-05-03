@@ -17,14 +17,21 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".AllSearch"
+            android:name=".Data_List"
             android:exported="false" />
+        <activity
+            android:name=".AllSearch"
+            android:exported="false"
+            android:label="AllSearch"
+            android:parentActivityName=".page1" />
         <activity
             android:name=".page1"
             android:exported="false" />
         <activity
             android:name=".add_data"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Add "
+            android:parentActivityName=".page1" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
