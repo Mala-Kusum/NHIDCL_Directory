@@ -34,7 +34,7 @@ public class page1 extends AppCompatActivity {
         ListView listView=findViewById(R.id.list);
         add=findViewById(R.id.add_fab);
         String[] s={"Managing Director","Director","Executive Director","Chief Vigilance Officer","General Manager","Deputy General Manager","Senior Manager","Manager","Deputy Manager","Private Secretary","Assistant Manager","Junior Manager","Graduate Engineer","Trainee Graduate Engineer","Accountant","Office Assistant","IT Engineer",
-                "Young Legal Professional","Site Engineer","Data Entry Operator","System Engineer","SAP Consultant","Technical Financial Executive","Stenographer","Architect Trainee","Legal Advisor","Legal Professional","Other"};
+                "Young Legal Professional","Site Engineer","Data Entry Operator","System Engineer","SAP Consultant","Technical Financial Executive","Stenographer","Architect Trainee","Legal Advisor","Legal Professional"};
         ArrayAdapter<String> designation=new ArrayAdapter<String>(page1.this,android.R.layout.simple_list_item_1,s);
         button=findViewById(R.id.allsearch);
         button.setOnClickListener(new View.OnClickListener() {
@@ -53,14 +53,14 @@ public class page1 extends AppCompatActivity {
         });
         listView.setAdapter(designation);
 
-        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?>parent,View view,int position,long id) {
                 selected = (String) parent.getItemAtPosition(position);
-                Intent intent2=new Intent(page1.this,Executive_Director.class);
+                Intent intent2=new Intent(page1.this,Data_List.class);
                 startActivity(intent2);
             }
-        });*/
+        });
 
     }
 

@@ -13,8 +13,8 @@ import retrofit2.http.Query;
 public interface EmployeeApi {
     @GET("/employee/get-all")
     Call<List<Employee>> getAllEmployees();
-    @GET("/employee")
-    Call<List<Employee>> getEmployeeByDesignation(@Query("designation") String designation);
+   /* @GET("/employee/get-by-des")
+    Call<List<Employee>> getEmployeeByDesignation(@Query("designation") String designation);*/
     @POST("/employee/save")
     Call<Employee> save(@Body Employee employee);
 }

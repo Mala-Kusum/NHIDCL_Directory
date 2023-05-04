@@ -24,15 +24,21 @@ import android.widget.Toast;
 
 
 import com.example.nhidcldirectory.model.Employee;
+import com.example.nhidcldirectory.retrofit.EmployeeApi;
+import com.example.nhidcldirectory.retrofit.retrofitService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class Executive_Director extends AppCompatActivity {
+
+public class Data_List extends AppCompatActivity {
    
-    List<Employee> list;
+    List<Employee> list,list2;
     ArrayList<Employee> stateList,nameList;
     RecyclerView recycler;
     boolean flag,flag2;
@@ -47,171 +53,150 @@ public class Executive_Director extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        EventChangeListener();
+        setContentView(R.layout.activity_data_list);
+       // EventChangeListener();
         flag=true;
         flag2=true;
         Log.e("Taaag", String.valueOf(list));
-        Context context=Executive_Director.this;
-        adapt=new MAdapter(this, (ArrayList<Employee>) list);
+        Context context=Data_List.this;
+        recycler=findViewById(R.id.executive_director);
+        recycler.setLayoutManager(new LinearLayoutManager(Data_List.this));
         sharedPref = context.getSharedPreferences("shared preference", Context.MODE_PRIVATE);
-        recycler.setAdapter(adapt);
-    }
-    protected void EventChangeListener() {
-        setContentView(R.layout.activity_data_list);
-        filter1=findViewById(R.id.filter1);
-        filter2=findViewById(R.id.filter2);
-        recycler = findViewById(R.id.executive_director);
-        recycler.setHasFixedSize(true);
-        recycler.setLayoutManager(new LinearLayoutManager(this));
-
-        Log.e("tag",page1.selected);
         switch (page1.selected){
             case  "Managing Director":
-                query = "SELECT * FROM employee WHERE designation='Managing Director';";
+                query = "Managing Director";
                 //Log.e("Taaag", "query");
                 break;
             case  "Graduate Engineer":
-                query = "SELECT * FROM employee WHERE designation='Graduate Engineer';";
+                query = "Graduate Engineer";
                 // Log.e("Taaag", "query");
                 break;
             case  "Director":
-                query = "SELECT * FROM employee WHERE designation='Director';";
+                query = "Director";
                 break;
             case  "Executive Director":
-                query = "SELECT * FROM employee WHERE designation='Executive Director';";
+                query = "Executive Director";
                 break;
             case  "Chief Vigilance Officer":
-                query = "SELECT * FROM employee WHERE designation='Chief Vigilance Officer';";
+                query = "Chief Vigilance Officer";
                 break;
             case  "General Manager":
-                query = "SELECT * FROM employee WHERE designation='General Manager';";
+                query = "General Manager";
                 break;
             case  "Deputy General Manager":
-                query = "SELECT * FROM employee WHERE designation='Deputy General Manager';";
+                query = "Deputy General Manager";
                 break;
             case  "Senior Manager":
-                query = "SELECT * FROM employee WHERE designation='Senior Manager';";
+                query = "Senior Manager";
                 break;
             case  "Manager":
-                query = "SELECT * FROM employee WHERE designation='Manager';";
+                query = "Manager";
                 break;
             case  "Private Secretary":
-                query = "SELECT * FROM employee WHERE designation='Private Secretary';";
+                query = "Private Secretary";
                 break;
             case  "Assistant Manager":
-                query = "SELECT * FROM employee WHERE designation='Assistant Manager';";
+                query = "Assistant Manager";
                 break;
             case  "Junior Manager":
-                query = "SELECT * FROM employee WHERE designation='Junior Manager';";
+                query = "Junior Manager";
                 break;
             case  "Deputy Manager":
-                query = "SELECT * FROM employee WHERE designation='Deputy Manager';";
+                query = "Deputy Manager";
                 break;
             case  "Trainee Graduate Engineer":
-                query = "SELECT * FROM employee WHERE designation='Trainee Graduate Engineer';";
+                query = "Trainee Graduate Engineer";
                 Log.e("Taaag", "query");
                 break;
             case  "Accountant":
-                query = "SELECT * FROM employee WHERE designation='Accountant';";
+                query = "Accountant";
                 Log.e("Taaag", "query");
                 break;
             case  "Office Assistant":
-                query = "SELECT * FROM employee WHERE designation='Office Assistant';";
+                query = "Office Assistant";
                 Log.e("Taaag", "query");
                 break;
             case  "IT Engineer":
-                query = "SELECT * FROM employee WHERE designation='IT Engineer';";
+                query = "IT Engineer";
                 Log.e("Taaag", "query");
                 break;
             case  "Young Legal Professional":
-                query = "SELECT * FROM employee WHERE designation='Young Legal Professional';";
+                query = "Young Legal Professional";
                 Log.e("Taaag", "query");
                 break;
             case  "Site Engineer":
-                query = "SELECT * FROM employee WHERE designation='Site Engineer';";
+                query = "Site Engineer";
                 Log.e("Taaag", "query");
                 break;
             case  "System Engineer":
-                query = "SELECT * FROM employee WHERE designation='System Engineer';";
+                query = "System Engineer";
                 Log.e("Taaag", "query");
                 break;
             case  "SAP Consultant":
-                query = "SELECT * FROM employee WHERE designation='SAP Consultant';";
+                query = "SAP Consultant";
                 Log.e("Taaag", "query");
                 break;
             case  "Technical Financial Executive":
-                query = "SELECT * FROM employee WHERE designation='Technical Financial Executive';";
+                query = "Technical Financial Executive";
                 Log.e("Taaag", "query");
                 break;
             case  "Stenographer":
-                query = "SELECT * FROM employee WHERE designation='Stenographer';";
+                query = "Stenographer";
                 Log.e("Taaag", "query");
                 break;
             case  "Architect Trainee":
-                query = "SELECT * FROM employee WHERE designation='Architect Trainee';";
+                query = "Architect Trainee";
                 Log.e("Taaag", "query");
                 break;
             case  "Legal Advisor":
-                query = "SELECT * FROM employee WHERE designation='Legal Advisor';";
+                query = "Legal Advisor";
                 Log.e("Taaag", "query");
                 break;
             case  "Legal Professional":
-                query = "SELECT * FROM employee WHERE designation='Legal Professional';";
+                query = "Legal Professional";
                 Log.e("Taaag", "query");
                 break;
             case  "Data Entry Operator":
-                query = "SELECT * FROM employee WHERE designation='Data Entry Operator';";
+                query = "Data Entry Operator";
                 Log.e("Taaag", "query");
                 break;
-            case  "Other":
+           /* case  "Other":
                 flag=false;
                 Log.e("incase", String.valueOf(flag));
                 query = "SELECT * FROM employee WHERE designation NOT IN ('Managing Director','Director','Executive Director','Chief Vigilance Officer','General Manager','Deputy General Manager','Senior Manager','Manager','Deputy Manager','Private Secretary','Assistant Manager','Junior Manager','Graduate Engineer','Trainee Graduate Engineer','Accountant','Office Assistant','IT Engineer','Young Legal Professional','Site Engineer','Data Entry Operator','System Engineer','SAP Consultant','Technical Financial Executive','Stenographer','Architect Trainee','Legal Advisor','Legal Professional');";
                 Log.e("Taaag", "query");
                 break;
-
+*/
         }
-        //query = noteRef.whereEqualTo(Designation, "Executive Director").orderBy(Name);
-        list = new ArrayList<Employee>();
-        query.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (error != null) {
-                    Log.e("Firestore Error", error.getMessage());
-                    return;
-                }
-                Log.e("Taaag", String.valueOf(flag));
-                if (flag==true) {
-                    for (DocumentChange dc : value.getDocumentChanges()) {
-                        if (dc.getType() == DocumentChange.Type.ADDED) {
-                            list.add(dc.getDocument().toObject(Employee.class));
-                        }
-                        adapt.notifyDataSetChanged();
-                    }
-                }
-                else{
-                    Log.e("TAGese","in else");
-                    for (DocumentChange dc : value.getDocumentChanges()) {
-                        if (dc.getType() == DocumentChange.Type.ADDED) {
-                            Employee m=dc.getDocument().toObject(Employee.class);
-                            Log.e("TAGm",m.getNAME());
-                            for(int i=0;i<s.length;i++) {
-                                if(m.getDESIGNATION().equals(s[i])) {
-                                    flag2=false;
-                                    break;
-                                }
-                            }
-                            if(flag2){
-                                list.add(m);
-                            }
-                            adapt.notifyDataSetChanged();
-                        }
-                    }
-                }
 
+        retrofitService retroservice = new retrofitService();
+        EmployeeApi employeeapi=retroservice.getRetrofit().create(EmployeeApi.class);
+        employeeapi.getAllEmployees().enqueue(new Callback<List<Employee>>() {
+            @Override
+            public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response) {
+                System.out.println(response.body());
+                list=(ArrayList<Employee>) response.body();
+                list2=new ArrayList<Employee>();
+                for (Employee e:list) {
+                    if(e.getDesignation().equals(query)){
+                        list2.add(e);
+                    }
+                }
+                adapt=new MAdapter(Data_List.this, (ArrayList<Employee>) list2);
+                recycler.setAdapter(adapt);
+            }
+
+            @Override
+            public void onFailure(Call<List<Employee>> call, Throwable t) {
+                Toast.makeText(Data_List.this, "data fetch failed!", Toast.LENGTH_SHORT).show();
+                Log.d("data fetch failed",t.toString());
             }
         });
+    }
+   /* protected void EventChangeListener() {
+
+
+
         addTextListener();
     }
     public void addTextListener(){
@@ -280,7 +265,7 @@ public class Executive_Director extends AppCompatActivity {
             }
         });
     }
-    public boolean onCreateOptionsMenu(Menu menu) {
+*/    public boolean onCreateOptionsMenu(Menu menu) {
         if(!MainActivity.guest) {
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.kebab_menu, menu);
